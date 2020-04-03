@@ -539,8 +539,9 @@ ASTNode *postorder(tree_node *pTree, ASTNode *inh){
             //new_NT.syn = new_NT.inh
             tree_node *PT_var_id_num = pTree->child;
             ASTNode *var_id_syn = postorder(PT_var_id_num, NULL);
-            //I inherit unary_op 
+            //I inherit unary_op
             ASTNode *New_NT_inh = inh;
+            New_NT_inh->left_child = var_id_syn;
             ASTNode *New_NT_syn = New_NT_inh;
             return New_NT_syn;
 

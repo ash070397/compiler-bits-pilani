@@ -2,7 +2,7 @@
 
 #define SYMBOL_TABLE_SIZE 30
 
-typedef enum{defined, declared} funcStatus;
+// typedef enum{defined, declared} funcStatus;
 typedef enum{INTEGER, BOOLEAN, REAL} datatype;
 
 int current_offset;
@@ -15,6 +15,7 @@ struct variable
 struct array 
 {
 	datatype dt;
+        bool is_static;
 	int s_idx, e_idx;
 };
 
@@ -32,7 +33,7 @@ struct parameter
 {
         struct struct_type type;
 	struct parameter *next;
-}; // linked list of parameters.
+};
 
 typedef struct variable variable;
 typedef struct array array;
@@ -43,16 +44,19 @@ typedef struct parameter parameter;
 //Function Symbol table
 struct func_hash_entry{
         char lexeme[21];
-        int lno; //First come first
-        funcStatus status;
+        int declare_lno;
+	int define_lno;
+	bool called;
+        // int lno; //First come first
+        // funcStatus status;
         struct parameter *inputList;
 	struct parameter *outputList;
         struct var_st *child;//link to variable symbol table
-        struct func_hash_entry *next; //link to a sibling function table.
+        struct func_hash_entry *next;
 };
 
 struct func_st{
-        int size; // size of HASH TABLE.
+        int size;
         struct func_hash_entry*head;
 }func_st_root[SYMBOL_TABLE_SIZE];
 
@@ -87,8 +91,6 @@ struct var_st{
         } parent;
         struct var_st *root_var_st;
 };
-
-
 
 typedef struct var_hash_entry var_hash_entry;
 typedef struct var_st var_st;
