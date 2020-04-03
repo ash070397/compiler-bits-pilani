@@ -1,0 +1,104 @@
+//multiple hash table
+All modules are global
+root symbol table with function entries
+we are creating 
+
+Take care:
+ - Hash table keys i.e. lexeme should case sensative
+ - Only Input variables can be shadowed
+
+Sematic check:
+ - declare a:integer
+   declare a:bool //ERROR
+ - function order (decare/define)
+ - should not shadow output parameters
+// - use before declaration not allowed
+ - function overloading is not allowed
+
+Issue:
+ - Dynamic offset and type
+ - Can function name and variable have same name
+
+
+/////////////
+module f():
+input: a:int
+output: b:int
+int c;
+c = a*2;
+bool a; <--(not error because flag = 0)
+bool d = not(a);
+int a; <--(will use the parameter of the first appearance and flag incountered = 3)
+
+for(d){
+    bool a; //not 
+    int b; <--(sol add root parent)
+    int c;  //no need to go up
+    int z;  //need to go up
+    bool c;  //error
+    bool d;  //error
+}
+
+int flag; 0: input, 1: output, 2:local, 3:(second_declaration and in input_list)
+
+a(bool) --> a(int)
+3           0
+
+
+////////Symbol table
+module defination //create new scope
+	current(PROGRAM)
+	or
+	current(ID)->parent(MODULE)
+
+declaration
+	current(ID)->parent(moduleDeclarations)
+
+input parameters
+	current(ID)->parent(input_plist)
+	current(ID)->left_child(datatype)
+
+ouput parameteres
+	current(ID)->parent(output_plist)
+	current(ID)->left_child(datatype)
+
+declare identifier
+	current(ID)->parent(idList)
+	current(ID)->parent->forward(datatype)
+
+start/end block //create new scope
+	- for
+		current(FOR)
+		current(ID)->parent(FOR)
+	- while
+		current(WHILE)
+	- case
+		current(NUM|TRUE|FALSE)->parent(SWITCH)
+	- default
+		current(DEFAULT)
+
+NOTE: 	Function lno: First come first serve
+	Flags
+	
+TODO: FOR variable restrictions
+	
+Semantic Rules Resolved: 1,10,(12),13.
+
+
+////////Sematic Rules
+1.	An identifier cannot be declared multiple times in the same scope.
+2.	An identifier must be declared before its use.
+3.	The types and the number of parameters returned by a function must be the same as that of the parameters used in invoking the function.
+4.	The parameters being returned by a function must be assigned a value. If a parameter does not get a value assigned within the function definition, it should be reported as an error.
+5.	The function that does not return any value, must be invoked appropriately.
+6.	Function input parameters passed while invoking it should be of the same type as those used in the function definition.
+7.	A switch statement with an integer typed identifier associated with it, can have case statement with case keyword followed by an integer only and the case statements must be followed by a default statement.
+8.	A switch statement with an identifier of type real is not valid and an error should be reported.
+9.	A switch statement with a boolean type identifier can have the case statements with labels true and false only. The switch statement then should not have a default statement.
+10.	Function overloading is not allowed.
+11.	A function declaration for a function being used (say F1) by another (say F2) must precede the definition of the function using it(i.e. F2), only if the function definition of F1 does not precede the definition of F2.
+12.	If the function definition of F1 precedes function definition of F2(the one which uses F1), then the function declaration of F1 is redundant and is not valid.
+13.	A for statement must not redefine the variable that participates in the iterating over the range.
+14.	The function cannot be invoked recursively.
+15.	An identifier used beyond its scope must be viewed as undefined
+16.	etc. (More semantics will be made available in the test cases)

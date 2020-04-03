@@ -1,0 +1,152 @@
+**
+. moduleDeclarations .  . NT
+. ID . compute . moduleDeclarations . T
+. otherModules .  . NT
+. PROGRAM . program . T
+. statements .  . PROGRAM . NT
+. DECLARE . declare . statements . T
+. idList .  . DECLARE . NT
+. ID . var_1_ . idList . T
+. ID . var_2_ . idList . T
+. ID . var_3_ . idList . T
+. INTEGER . integer . DECLARE . T
+. DECLARE . declare . statements . T
+. idList .  . DECLARE . NT
+. ID . R1_abc . idList . T
+. BOOLEAN . boolean . DECLARE . T
+. DECLARE . declare . statements . T
+. idList .  . DECLARE . NT
+. ID . r2_ABC . idList . T
+. INTEGER . integer . DECLARE . T
+. DECLARE . declare . statements . T
+. idList .  . DECLARE . NT
+. ID . R3_abc . idList . T
+. REAL . real . DECLARE . T
+. GET_VALUE . get_value . statements . T
+. ID . var_1_ . GET_VALUE . T
+. assignmentStmt .  . statements . NT
+. ID . var_2_ . ASSIGNOP . T
+. ASSIGNOP . := . assignmentStmt . T
+. NUM . 10 . ASSIGNOP . T
+. assignmentStmt .  . statements . NT
+. ID . var_3_ . ASSIGNOP . T
+. ASSIGNOP . := . assignmentStmt . T
+. MINUS . - . ASSIGNOP . T
+. RNUM . 6.34 . MINUS . T
+. moduleReuseStmt .  . statements . NT
+. idList .  . ASSIGNOP . NT
+. ID . R1_abc . idList . T
+. ID . r2_ABC . idList . T
+. ID . R3_abc . idList . T
+. ASSIGNOP .  . moduleReuseStmt . T
+. ID . compute . ASSIGNOP . T
+. idList .  . ASSIGNOP . NT
+. ID . var_1_ . idList . T
+. ID . var_2_ . idList . T
+. ID . var_34 . idList . T
+. otherModules .  . NT
+. MODULE . module . otherModules . T
+. ID . compute . MODULE . T
+. input_plist .  . MODULE . NT
+. ID . a . input_plist . T
+. INTEGER . integer . ID . T
+. ID . b . input_plist . T
+. INTEGER . integer . ID . T
+. ID . c . input_plist . T
+. INTEGER . integer . ID . T
+. RETURNS .  . MODULE . T
+. output_plist .  . RETURNS . NT
+. ID . res_1 . output_plist . T
+. BOOLEAN . boolean . ID . T
+. ID . res_2_a . output_plist . T
+. INTEGER . integer . ID . T
+. ID . res_2__b . output_plist . T
+. REAL . real . ID . T
+. statements .  . MODULE . NT
+. DECLARE . declare . statements . T
+. idList .  . DECLARE . NT
+. ID . b . idList . T
+. BOOLEAN . boolean . DECLARE . T
+. assignmentStmt .  . statements . NT
+. ID . res_2_a . ASSIGNOP . T
+. ASSIGNOP . := . assignmentStmt . T
+. MINUS . - . ASSIGNOP . T
+. ID . a . MUL . T
+. MUL . * . MINUS . T
+. ID . b . MUL . T
+. MINUS . - . MINUS . T
+. ID . c . DIV . T
+. DIV . / . MINUS . T
+. NUM . 5 . DIV . T
+. assignmentStmt .  . statements . NT
+. ID . res_2__b . ASSIGNOP . T
+. ASSIGNOP . := . assignmentStmt . T
+. ID . res_2_a . PLUS . T
+. PLUS . + . MUL . T
+. ID . a . PLUS . T
+. MUL . * . PLUS . T
+. NUM . 12 . MUL . T
+. PLUS . + . DIV . T
+. RNUM . 22.34E-2 . PLUS . T
+. DIV . / . ASSIGNOP . T
+. NUM . 13 . DIV . T
+. assignmentStmt .  . statements . NT
+. ID . b . ASSIGNOP . T
+. ASSIGNOP . := . assignmentStmt . T
+. ID . a . LE . T
+. LE . <= . AND . T
+. ID . b . LE . T
+. AND . AND . ASSIGNOP . T
+. ID . c . GE . T
+. GE . >= . AND . T
+. ID . a . GE . T
+. assignmentStmt .  . statements . NT
+. ID . res_1 . ASSIGNOP . T
+. ASSIGNOP . := . assignmentStmt . T
+. TRUE . true . AND . T
+. AND . AND . OR . T
+. ID . c . EQ . T
+. EQ . == . AND . T
+. ID . b . EQ . T
+. OR . OR . ASSIGNOP . T
+. ID . b . GT . T
+. GT . > . AND . T
+. ID . p . GT . T
+. AND . AND . OR . T
+. ID . a . LE . T
+. LE . <= . AND . T
+. ID . c . LE . T
+. PRINT . print . statements . T
+. ID . res_1 . PRINT . T
+ **
+
+** This testcase demonstrates the syntactic correctness of the constructs such as modules, simple and declaration statements, and expressions**
+
+declare module compute;
+<<<driver program>>>
+start
+	declare var_1_, var_2_, var_3_:integer;
+	declare R1_abc: boolean;
+	declare r2_ABC: integer;
+	declare R3_abc: real;
+	get_value(var_1_);
+	var_2_:=10;
+	var_3_:= -(6.34);
+	[R1_abc, r2_ABC, R3_abc] := use module compute with parameters var_1_, var_2_, var_34;
+	** do not bother that the last variable is not declared. It will be taken care of later in the semantic analysis phase**
+end
+<<module compute>>
+takes input[a:integer, b:integer, c:integer];
+returns [res_1:boolean, res_2_a:integer, res_2__b:real];
+start
+	declare b:boolean;
+	res_2_a:= -(a*b-c/5);
+	res_2__b:= ((res_2_a + a)*12+22.34E-2)/13;
+	b := a <=  b AND c >= a OR  a<0 AND false;
+	res_1:= (true AND c==b)OR(b>p AND (a<=c));
+	** check  rules 27 a to e and redefine to preserve the parentheses needs ** 
+	print(res_1);
+end
+
+**verify the output of the lexical analyzer as well**
+**check the correctness of the parse tree**

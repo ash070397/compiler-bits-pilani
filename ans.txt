@@ -1,0 +1,227 @@
+LEXEME        LINE NO         TOKEN NAME             VALUE OF CONST                PARENT NODE                     IS LEAF                     CURRENT NODE
+ 		1		EPS			N/A			moduleDeclarations				TRUE				terminal
+
+----		-1		moduleDeclarations			N/A			program				FALSE				moduleDeclarations
+
+----		0		program			N/A			No Parent (root)				FALSE				program
+
+ 		1		EPS			N/A			otherModules				TRUE				terminal
+
+----		-1		otherModules			N/A			program				FALSE				otherModules
+
+<<<		1		DRIVERDEF			N/A			driverModule				TRUE				terminal
+
+----		-1		driverModule			N/A			program				FALSE				driverModule
+
+driver		1		DRIVER			N/A			driverModule				TRUE				terminal
+
+program		1		PROGRAM			N/A			driverModule				TRUE				terminal
+
+>>>		1		DRIVERENDDEF			N/A			driverModule				TRUE				terminal
+
+start		2		START			N/A			moduleDef				TRUE				terminal
+
+----		-1		moduleDef			N/A			driverModule				FALSE				moduleDef
+
+declare		4		DECLARE			N/A			declareStmt				TRUE				terminal
+
+----		-1		declareStmt			N/A			statement				FALSE				declareStmt
+
+k		4		ID			N/A			idList				TRUE				terminal
+
+----		-1		idList			N/A			declareStmt				FALSE				idList
+
+ 		4		EPS			N/A			N3				TRUE				terminal
+
+----		-1		N3			N/A			idList				FALSE				N3
+
+:		4		COLON			N/A			declareStmt				TRUE				terminal
+
+integer		4		INTEGER			N/A			dataType				TRUE				terminal
+
+----		-1		dataType			N/A			declareStmt				FALSE				dataType
+
+;		4		SEMICOL			N/A			declareStmt				TRUE				terminal
+
+----		-1		statement			N/A			statements				FALSE				statement
+
+----		-1		statements			N/A			moduleDef				FALSE				statements
+
+for		7		FOR			N/A			iterativeStmt				TRUE				terminal
+
+----		-1		iterativeStmt			N/A			statement				FALSE				iterativeStmt
+
+(		7		BO			N/A			iterativeStmt				TRUE				terminal
+
+k		7		ID			N/A			iterativeStmt				TRUE				terminal
+
+in		7		IN			N/A			iterativeStmt				TRUE				terminal
+
+6		7		NUM			6			range				TRUE				terminal
+
+----		-1		range			N/A			iterativeStmt				FALSE				range
+
+..		7		RANGEOP			N/A			range				TRUE				terminal
+
+10		7		NUM			10			range				TRUE				terminal
+
+)		7		BC			N/A			iterativeStmt				TRUE				terminal
+
+start		7		START			N/A			iterativeStmt				TRUE				terminal
+
+declare		9		DECLARE			N/A			declareStmt				TRUE				terminal
+
+----		-1		declareStmt			N/A			statement				FALSE				declareStmt
+
+k		9		ID			N/A			idList				TRUE				terminal
+
+----		-1		idList			N/A			declareStmt				FALSE				idList
+
+ 		9		EPS			N/A			N3				TRUE				terminal
+
+----		-1		N3			N/A			idList				FALSE				N3
+
+:		9		COLON			N/A			declareStmt				TRUE				terminal
+
+real		9		REAL			N/A			dataType				TRUE				terminal
+
+----		-1		dataType			N/A			declareStmt				FALSE				dataType
+
+;		9		SEMICOL			N/A			declareStmt				TRUE				terminal
+
+----		-1		statement			N/A			statements				FALSE				statement
+
+----		-1		statements			N/A			iterativeStmt				FALSE				statements
+
+ 		10		EPS			N/A			statements				TRUE				terminal
+
+----		-1		statements			N/A			statements				FALSE				statements
+
+end		7		END			N/A			iterativeStmt				TRUE				terminal
+
+----		-1		statement			N/A			statements				FALSE				statement
+
+----		-1		statements			N/A			statements				FALSE				statements
+
+ 		11		EPS			N/A			optional				TRUE				terminal
+
+----		-1		optional			N/A			moduleReuseStmt				FALSE				optional
+
+----		-1		moduleReuseStmt			N/A			simpleStmt				FALSE				moduleReuseStmt
+
+use		11		USE			N/A			moduleReuseStmt				TRUE				terminal
+
+module		11		MODULE			N/A			moduleReuseStmt				TRUE				terminal
+
+readArr		11		ID			N/A			moduleReuseStmt				TRUE				terminal
+
+with		11		WITH			N/A			moduleReuseStmt				TRUE				terminal
+
+parameters		11		PARAMETERS			N/A			moduleReuseStmt				TRUE				terminal
+
+A		11		ID			N/A			idList				TRUE				terminal
+
+----		-1		idList			N/A			moduleReuseStmt				FALSE				idList
+
+,		11		COMMA			N/A			N3				TRUE				terminal
+
+----		-1		N3			N/A			idList				FALSE				N3
+
+k		11		ID			N/A			N3				TRUE				terminal
+
+ 		11		EPS			N/A			N3				TRUE				terminal
+
+----		-1		N3			N/A			N3				FALSE				N3
+
+;		11		SEMICOL			N/A			moduleReuseStmt				TRUE				terminal
+
+----		-1		simpleStmt			N/A			statement				FALSE				simpleStmt
+
+----		-1		statement			N/A			statements				FALSE				statement
+
+----		-1		statements			N/A			statements				FALSE				statements
+
+[		12		SQBO			N/A			optional				TRUE				terminal
+
+----		-1		optional			N/A			moduleReuseStmt				FALSE				optional
+
+s		12		ID			N/A			idList				TRUE				terminal
+
+----		-1		idList			N/A			optional				FALSE				idList
+
+ 		12		EPS			N/A			N3				TRUE				terminal
+
+----		-1		N3			N/A			idList				FALSE				N3
+
+]		12		SQBC			N/A			optional				TRUE				terminal
+
+:=		12		ASSIGNOP			N/A			optional				TRUE				terminal
+
+----		-1		moduleReuseStmt			N/A			simpleStmt				FALSE				moduleReuseStmt
+
+use		12		USE			N/A			moduleReuseStmt				TRUE				terminal
+
+module		12		MODULE			N/A			moduleReuseStmt				TRUE				terminal
+
+arraySum		12		ID			N/A			moduleReuseStmt				TRUE				terminal
+
+with		12		WITH			N/A			moduleReuseStmt				TRUE				terminal
+
+parameters		12		PARAMETERS			N/A			moduleReuseStmt				TRUE				terminal
+
+A		12		ID			N/A			idList				TRUE				terminal
+
+----		-1		idList			N/A			moduleReuseStmt				FALSE				idList
+
+,		12		COMMA			N/A			N3				TRUE				terminal
+
+----		-1		N3			N/A			idList				FALSE				N3
+
+k		12		ID			N/A			N3				TRUE				terminal
+
+ 		12		EPS			N/A			N3				TRUE				terminal
+
+----		-1		N3			N/A			N3				FALSE				N3
+
+;		12		SEMICOL			N/A			moduleReuseStmt				TRUE				terminal
+
+----		-1		simpleStmt			N/A			statement				FALSE				simpleStmt
+
+----		-1		statement			N/A			statements				FALSE				statement
+
+----		-1		statements			N/A			statements				FALSE				statements
+
+print		13		PRINT			N/A			ioStmt				TRUE				terminal
+
+----		-1		ioStmt			N/A			statement				FALSE				ioStmt
+
+(		13		BO			N/A			ioStmt				TRUE				terminal
+
+s		13		ID			N/A			var_id_num				TRUE				terminal
+
+----		-1		var_id_num			N/A			var				FALSE				var_id_num
+
+ 		13		EPS			N/A			whichID				TRUE				terminal
+
+----		-1		whichID			N/A			var_id_num				FALSE				whichID
+
+----		-1		var			N/A			ioStmt				FALSE				var
+
+)		13		BC			N/A			ioStmt				TRUE				terminal
+
+;		13		SEMICOL			N/A			ioStmt				TRUE				terminal
+
+----		-1		statement			N/A			statements				FALSE				statement
+
+----		-1		statements			N/A			statements				FALSE				statements
+
+ 		14		EPS			N/A			statements				TRUE				terminal
+
+----		-1		statements			N/A			statements				FALSE				statements
+
+end		2		END			N/A			moduleDef				TRUE				terminal
+
+ 		0		EPS			N/A			otherModules				TRUE				terminal
+
+----		-1		otherModules			N/A			program				FALSE				otherModules
+
