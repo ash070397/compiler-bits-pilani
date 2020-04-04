@@ -159,7 +159,9 @@ start
 end
 <<<driver program>>>
 start
-	declare A:array[1..15] of real;
+	declare i1,i2:integer;
+	declare A:array[i1..i2] of real;
+	declare B:array[3:11] of integer;
 	declare k:integer;
 	declare s:real;
 	get_value(k);

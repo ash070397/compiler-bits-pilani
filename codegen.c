@@ -31,7 +31,21 @@ void declaration_varst(var_st *table,FILE*f)
                 strcpy(temp_lexeme,temp->lexeme);
                 strcat(temp_lexeme,"_");
                 strcat(temp_lexeme,temp_buffer);
-                fprintf(f,"%s: resb %d \n",temp_lexeme,temp->width);
+                if(temp->type.is_array == 0){
+                    
+                    fprintf(f,"%s: resb %d \n",temp_lexeme,temp->width);
+                }
+                else{
+                    int temp_width;
+                    if(temp->type.t.a.is_static) 
+                    {
+                       // printf("\n is_static %s \n", temp ->lexeme);
+                       // printf("%d %d\n",temp->type.t.a.s_idx,temp->type.t.a.e_idx);
+                        temp_width = temp->width * (temp->type.t.a.e_idx - temp->type.t.a.s_idx +1);
+                    }
+                    else temp_width = 4;
+                    fprintf(f,"%s: resb %d \n",temp_lexeme,temp_width);
+                }
                 temp = temp->next;
             }
         }

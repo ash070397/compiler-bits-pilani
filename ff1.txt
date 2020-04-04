@@ -369,41 +369,25 @@ declare		162		DECLARE			N/A			declareStmt				TRUE				terminal
 
 ----		-1		declareStmt			N/A			statement				FALSE				declareStmt
 
-A		162		ID			N/A			idList				TRUE				terminal
+i1		162		ID			N/A			idList				TRUE				terminal
 
 ----		-1		idList			N/A			declareStmt				FALSE				idList
 
- 		162		EPS			N/A			N3				TRUE				terminal
+,		162		COMMA			N/A			N3				TRUE				terminal
 
 ----		-1		N3			N/A			idList				FALSE				N3
 
+i2		162		ID			N/A			N3				TRUE				terminal
+
+ 		162		EPS			N/A			N3				TRUE				terminal
+
+----		-1		N3			N/A			N3				FALSE				N3
+
 :		162		COLON			N/A			declareStmt				TRUE				terminal
 
-array		162		ARRAY			N/A			dataType				TRUE				terminal
+integer		162		INTEGER			N/A			dataType				TRUE				terminal
 
 ----		-1		dataType			N/A			declareStmt				FALSE				dataType
-
-[		162		SQBO			N/A			dataType				TRUE				terminal
-
-1		162		NUM			1			index				TRUE				terminal
-
-----		-1		index			N/A			range_arrays				FALSE				index
-
-----		-1		range_arrays			N/A			dataType				FALSE				range_arrays
-
-..		162		RANGEOP			N/A			range_arrays				TRUE				terminal
-
-15		162		NUM			15			index				TRUE				terminal
-
-----		-1		index			N/A			range_arrays				FALSE				index
-
-]		162		SQBC			N/A			dataType				TRUE				terminal
-
-of		162		OF			N/A			dataType				TRUE				terminal
-
-real		162		REAL			N/A			type				TRUE				terminal
-
-----		-1		type			N/A			dataType				FALSE				type
 
 ;		162		SEMICOL			N/A			declareStmt				TRUE				terminal
 
@@ -415,7 +399,7 @@ declare		163		DECLARE			N/A			declareStmt				TRUE				terminal
 
 ----		-1		declareStmt			N/A			statement				FALSE				declareStmt
 
-k		163		ID			N/A			idList				TRUE				terminal
+A		163		ID			N/A			idList				TRUE				terminal
 
 ----		-1		idList			N/A			declareStmt				FALSE				idList
 
@@ -425,9 +409,31 @@ k		163		ID			N/A			idList				TRUE				terminal
 
 :		163		COLON			N/A			declareStmt				TRUE				terminal
 
-integer		163		INTEGER			N/A			dataType				TRUE				terminal
+array		163		ARRAY			N/A			dataType				TRUE				terminal
 
 ----		-1		dataType			N/A			declareStmt				FALSE				dataType
+
+[		163		SQBO			N/A			dataType				TRUE				terminal
+
+i1		163		ID			N/A			index				TRUE				terminal
+
+----		-1		index			N/A			range_arrays				FALSE				index
+
+----		-1		range_arrays			N/A			dataType				FALSE				range_arrays
+
+..		163		RANGEOP			N/A			range_arrays				TRUE				terminal
+
+i2		163		ID			N/A			index				TRUE				terminal
+
+----		-1		index			N/A			range_arrays				FALSE				index
+
+]		163		SQBC			N/A			dataType				TRUE				terminal
+
+of		163		OF			N/A			dataType				TRUE				terminal
+
+real		163		REAL			N/A			type				TRUE				terminal
+
+----		-1		type			N/A			dataType				FALSE				type
 
 ;		163		SEMICOL			N/A			declareStmt				TRUE				terminal
 
@@ -439,7 +445,7 @@ declare		164		DECLARE			N/A			declareStmt				TRUE				terminal
 
 ----		-1		declareStmt			N/A			statement				FALSE				declareStmt
 
-s		164		ID			N/A			idList				TRUE				terminal
+B		164		ID			N/A			idList				TRUE				terminal
 
 ----		-1		idList			N/A			declareStmt				FALSE				idList
 
@@ -449,9 +455,31 @@ s		164		ID			N/A			idList				TRUE				terminal
 
 :		164		COLON			N/A			declareStmt				TRUE				terminal
 
-real		164		REAL			N/A			dataType				TRUE				terminal
+array		164		ARRAY			N/A			dataType				TRUE				terminal
 
 ----		-1		dataType			N/A			declareStmt				FALSE				dataType
+
+[		164		SQBO			N/A			dataType				TRUE				terminal
+
+3		164		NUM			3			index				TRUE				terminal
+
+----		-1		index			N/A			range_arrays				FALSE				index
+
+----		-1		range_arrays			N/A			dataType				FALSE				range_arrays
+
+		164		RANGEOP			N/A			range_arrays				TRUE				terminal
+
+11		164		NUM			11			index				TRUE				terminal
+
+----		-1		index			N/A			range_arrays				FALSE				index
+
+]		164		SQBC			N/A			dataType				TRUE				terminal
+
+of		164		OF			N/A			dataType				TRUE				terminal
+
+integer		164		INTEGER			N/A			type				TRUE				terminal
+
+----		-1		type			N/A			dataType				FALSE				type
 
 ;		164		SEMICOL			N/A			declareStmt				TRUE				terminal
 
@@ -459,273 +487,321 @@ real		164		REAL			N/A			dataType				TRUE				terminal
 
 ----		-1		statements			N/A			statements				FALSE				statements
 
-get_value		165		GET_VALUE			N/A			ioStmt				TRUE				terminal
+declare		165		DECLARE			N/A			declareStmt				TRUE				terminal
 
-----		-1		ioStmt			N/A			statement				FALSE				ioStmt
+----		-1		declareStmt			N/A			statement				FALSE				declareStmt
 
-(		165		BO			N/A			ioStmt				TRUE				terminal
+k		165		ID			N/A			idList				TRUE				terminal
 
-k		165		ID			N/A			ioStmt				TRUE				terminal
+----		-1		idList			N/A			declareStmt				FALSE				idList
 
-)		165		BC			N/A			ioStmt				TRUE				terminal
+ 		165		EPS			N/A			N3				TRUE				terminal
 
-;		165		SEMICOL			N/A			ioStmt				TRUE				terminal
+----		-1		N3			N/A			idList				FALSE				N3
+
+:		165		COLON			N/A			declareStmt				TRUE				terminal
+
+integer		165		INTEGER			N/A			dataType				TRUE				terminal
+
+----		-1		dataType			N/A			declareStmt				FALSE				dataType
+
+;		165		SEMICOL			N/A			declareStmt				TRUE				terminal
 
 ----		-1		statement			N/A			statements				FALSE				statement
 
 ----		-1		statements			N/A			statements				FALSE				statements
 
- 		166		EPS			N/A			optional				TRUE				terminal
+declare		166		DECLARE			N/A			declareStmt				TRUE				terminal
 
-----		-1		optional			N/A			moduleReuseStmt				FALSE				optional
+----		-1		declareStmt			N/A			statement				FALSE				declareStmt
 
-----		-1		moduleReuseStmt			N/A			simpleStmt				FALSE				moduleReuseStmt
+s		166		ID			N/A			idList				TRUE				terminal
 
-use		166		USE			N/A			moduleReuseStmt				TRUE				terminal
-
-module		166		MODULE			N/A			moduleReuseStmt				TRUE				terminal
-
-readArr		166		ID			N/A			moduleReuseStmt				TRUE				terminal
-
-with		166		WITH			N/A			moduleReuseStmt				TRUE				terminal
-
-parameters		166		PARAMETERS			N/A			moduleReuseStmt				TRUE				terminal
-
-A		166		ID			N/A			idList				TRUE				terminal
-
-----		-1		idList			N/A			moduleReuseStmt				FALSE				idList
-
-,		166		COMMA			N/A			N3				TRUE				terminal
-
-----		-1		N3			N/A			idList				FALSE				N3
-
-k		166		ID			N/A			N3				TRUE				terminal
+----		-1		idList			N/A			declareStmt				FALSE				idList
 
  		166		EPS			N/A			N3				TRUE				terminal
 
-----		-1		N3			N/A			N3				FALSE				N3
+----		-1		N3			N/A			idList				FALSE				N3
 
-;		166		SEMICOL			N/A			moduleReuseStmt				TRUE				terminal
+:		166		COLON			N/A			declareStmt				TRUE				terminal
 
-----		-1		simpleStmt			N/A			statement				FALSE				simpleStmt
+real		166		REAL			N/A			dataType				TRUE				terminal
+
+----		-1		dataType			N/A			declareStmt				FALSE				dataType
+
+;		166		SEMICOL			N/A			declareStmt				TRUE				terminal
 
 ----		-1		statement			N/A			statements				FALSE				statement
 
 ----		-1		statements			N/A			statements				FALSE				statements
 
-[		167		SQBO			N/A			optional				TRUE				terminal
-
-----		-1		optional			N/A			moduleReuseStmt				FALSE				optional
-
-s		167		ID			N/A			idList				TRUE				terminal
-
-----		-1		idList			N/A			optional				FALSE				idList
-
- 		167		EPS			N/A			N3				TRUE				terminal
-
-----		-1		N3			N/A			idList				FALSE				N3
-
-]		167		SQBC			N/A			optional				TRUE				terminal
-
-:=		167		ASSIGNOP			N/A			optional				TRUE				terminal
-
-----		-1		moduleReuseStmt			N/A			simpleStmt				FALSE				moduleReuseStmt
-
-use		167		USE			N/A			moduleReuseStmt				TRUE				terminal
-
-module		167		MODULE			N/A			moduleReuseStmt				TRUE				terminal
-
-arraySum		167		ID			N/A			moduleReuseStmt				TRUE				terminal
-
-with		167		WITH			N/A			moduleReuseStmt				TRUE				terminal
-
-parameters		167		PARAMETERS			N/A			moduleReuseStmt				TRUE				terminal
-
-A		167		ID			N/A			idList				TRUE				terminal
-
-----		-1		idList			N/A			moduleReuseStmt				FALSE				idList
-
-,		167		COMMA			N/A			N3				TRUE				terminal
-
-----		-1		N3			N/A			idList				FALSE				N3
-
-k		167		ID			N/A			N3				TRUE				terminal
-
- 		167		EPS			N/A			N3				TRUE				terminal
-
-----		-1		N3			N/A			N3				FALSE				N3
-
-;		167		SEMICOL			N/A			moduleReuseStmt				TRUE				terminal
-
-----		-1		simpleStmt			N/A			statement				FALSE				simpleStmt
-
-----		-1		statement			N/A			statements				FALSE				statement
-
-----		-1		statements			N/A			statements				FALSE				statements
-
-print		168		PRINT			N/A			ioStmt				TRUE				terminal
+get_value		167		GET_VALUE			N/A			ioStmt				TRUE				terminal
 
 ----		-1		ioStmt			N/A			statement				FALSE				ioStmt
 
-(		168		BO			N/A			ioStmt				TRUE				terminal
+(		167		BO			N/A			ioStmt				TRUE				terminal
 
-s		168		ID			N/A			var_id_num				TRUE				terminal
+k		167		ID			N/A			ioStmt				TRUE				terminal
+
+)		167		BC			N/A			ioStmt				TRUE				terminal
+
+;		167		SEMICOL			N/A			ioStmt				TRUE				terminal
+
+----		-1		statement			N/A			statements				FALSE				statement
+
+----		-1		statements			N/A			statements				FALSE				statements
+
+ 		168		EPS			N/A			optional				TRUE				terminal
+
+----		-1		optional			N/A			moduleReuseStmt				FALSE				optional
+
+----		-1		moduleReuseStmt			N/A			simpleStmt				FALSE				moduleReuseStmt
+
+use		168		USE			N/A			moduleReuseStmt				TRUE				terminal
+
+module		168		MODULE			N/A			moduleReuseStmt				TRUE				terminal
+
+readArr		168		ID			N/A			moduleReuseStmt				TRUE				terminal
+
+with		168		WITH			N/A			moduleReuseStmt				TRUE				terminal
+
+parameters		168		PARAMETERS			N/A			moduleReuseStmt				TRUE				terminal
+
+A		168		ID			N/A			idList				TRUE				terminal
+
+----		-1		idList			N/A			moduleReuseStmt				FALSE				idList
+
+,		168		COMMA			N/A			N3				TRUE				terminal
+
+----		-1		N3			N/A			idList				FALSE				N3
+
+k		168		ID			N/A			N3				TRUE				terminal
+
+ 		168		EPS			N/A			N3				TRUE				terminal
+
+----		-1		N3			N/A			N3				FALSE				N3
+
+;		168		SEMICOL			N/A			moduleReuseStmt				TRUE				terminal
+
+----		-1		simpleStmt			N/A			statement				FALSE				simpleStmt
+
+----		-1		statement			N/A			statements				FALSE				statement
+
+----		-1		statements			N/A			statements				FALSE				statements
+
+[		169		SQBO			N/A			optional				TRUE				terminal
+
+----		-1		optional			N/A			moduleReuseStmt				FALSE				optional
+
+s		169		ID			N/A			idList				TRUE				terminal
+
+----		-1		idList			N/A			optional				FALSE				idList
+
+ 		169		EPS			N/A			N3				TRUE				terminal
+
+----		-1		N3			N/A			idList				FALSE				N3
+
+]		169		SQBC			N/A			optional				TRUE				terminal
+
+:=		169		ASSIGNOP			N/A			optional				TRUE				terminal
+
+----		-1		moduleReuseStmt			N/A			simpleStmt				FALSE				moduleReuseStmt
+
+use		169		USE			N/A			moduleReuseStmt				TRUE				terminal
+
+module		169		MODULE			N/A			moduleReuseStmt				TRUE				terminal
+
+arraySum		169		ID			N/A			moduleReuseStmt				TRUE				terminal
+
+with		169		WITH			N/A			moduleReuseStmt				TRUE				terminal
+
+parameters		169		PARAMETERS			N/A			moduleReuseStmt				TRUE				terminal
+
+A		169		ID			N/A			idList				TRUE				terminal
+
+----		-1		idList			N/A			moduleReuseStmt				FALSE				idList
+
+,		169		COMMA			N/A			N3				TRUE				terminal
+
+----		-1		N3			N/A			idList				FALSE				N3
+
+k		169		ID			N/A			N3				TRUE				terminal
+
+ 		169		EPS			N/A			N3				TRUE				terminal
+
+----		-1		N3			N/A			N3				FALSE				N3
+
+;		169		SEMICOL			N/A			moduleReuseStmt				TRUE				terminal
+
+----		-1		simpleStmt			N/A			statement				FALSE				simpleStmt
+
+----		-1		statement			N/A			statements				FALSE				statement
+
+----		-1		statements			N/A			statements				FALSE				statements
+
+print		170		PRINT			N/A			ioStmt				TRUE				terminal
+
+----		-1		ioStmt			N/A			statement				FALSE				ioStmt
+
+(		170		BO			N/A			ioStmt				TRUE				terminal
+
+s		170		ID			N/A			var_id_num				TRUE				terminal
 
 ----		-1		var_id_num			N/A			var				FALSE				var_id_num
 
- 		168		EPS			N/A			whichID				TRUE				terminal
+ 		170		EPS			N/A			whichID				TRUE				terminal
 
 ----		-1		whichID			N/A			var_id_num				FALSE				whichID
 
 ----		-1		var			N/A			ioStmt				FALSE				var
 
-)		168		BC			N/A			ioStmt				TRUE				terminal
+)		170		BC			N/A			ioStmt				TRUE				terminal
 
-;		168		SEMICOL			N/A			ioStmt				TRUE				terminal
+;		170		SEMICOL			N/A			ioStmt				TRUE				terminal
 
 ----		-1		statement			N/A			statements				FALSE				statement
 
 ----		-1		statements			N/A			statements				FALSE				statements
 
- 		169		EPS			N/A			statements				TRUE				terminal
+ 		171		EPS			N/A			statements				TRUE				terminal
 
 ----		-1		statements			N/A			statements				FALSE				statements
 
 end		161		END			N/A			moduleDef				TRUE				terminal
 
-<<		176		DEF			N/A			module				TRUE				terminal
+<<		178		DEF			N/A			module				TRUE				terminal
 
 ----		-1		module			N/A			otherModules				FALSE				module
 
-module		176		MODULE			N/A			module				TRUE				terminal
+module		178		MODULE			N/A			module				TRUE				terminal
 
-readArr		176		ID			N/A			module				TRUE				terminal
+readArr		178		ID			N/A			module				TRUE				terminal
 
->>		176		ENDDEF			N/A			module				TRUE				terminal
+>>		178		ENDDEF			N/A			module				TRUE				terminal
 
-takes		176		TAKES			N/A			module				TRUE				terminal
+takes		178		TAKES			N/A			module				TRUE				terminal
 
-input		176		INPUT			N/A			module				TRUE				terminal
+input		178		INPUT			N/A			module				TRUE				terminal
 
-[		176		SQBO			N/A			module				TRUE				terminal
+[		178		SQBO			N/A			module				TRUE				terminal
 
-arr1		177		ID			N/A			input_plist				TRUE				terminal
+arr1		179		ID			N/A			input_plist				TRUE				terminal
 
 ----		-1		input_plist			N/A			module				FALSE				input_plist
 
-:		177		COLON			N/A			input_plist				TRUE				terminal
+:		179		COLON			N/A			input_plist				TRUE				terminal
 
-array		177		ARRAY			N/A			dataType				TRUE				terminal
+array		179		ARRAY			N/A			dataType				TRUE				terminal
 
 ----		-1		dataType			N/A			input_plist				FALSE				dataType
 
-[		177		SQBO			N/A			dataType				TRUE				terminal
+[		179		SQBO			N/A			dataType				TRUE				terminal
 
-1		177		NUM			1			index				TRUE				terminal
+1		179		NUM			1			index				TRUE				terminal
 
 ----		-1		index			N/A			range_arrays				FALSE				index
 
 ----		-1		range_arrays			N/A			dataType				FALSE				range_arrays
 
-..		177		RANGEOP			N/A			range_arrays				TRUE				terminal
+..		179		RANGEOP			N/A			range_arrays				TRUE				terminal
 
-15		177		NUM			15			index				TRUE				terminal
+15		179		NUM			15			index				TRUE				terminal
 
 ----		-1		index			N/A			range_arrays				FALSE				index
 
-]		177		SQBC			N/A			dataType				TRUE				terminal
+]		179		SQBC			N/A			dataType				TRUE				terminal
 
-of		177		OF			N/A			dataType				TRUE				terminal
+of		179		OF			N/A			dataType				TRUE				terminal
 
-real		177		REAL			N/A			type				TRUE				terminal
+real		179		REAL			N/A			type				TRUE				terminal
 
 ----		-1		type			N/A			dataType				FALSE				type
 
-,		177		COMMA			N/A			N1				TRUE				terminal
+,		179		COMMA			N/A			N1				TRUE				terminal
 
 ----		-1		N1			N/A			input_plist				FALSE				N1
 
-k		177		ID			N/A			N1				TRUE				terminal
+k		179		ID			N/A			N1				TRUE				terminal
 
-:		177		COLON			N/A			N1				TRUE				terminal
+:		179		COLON			N/A			N1				TRUE				terminal
 
-integer		177		INTEGER			N/A			dataType				TRUE				terminal
+integer		179		INTEGER			N/A			dataType				TRUE				terminal
 
 ----		-1		dataType			N/A			N1				FALSE				dataType
 
- 		177		EPS			N/A			N1				TRUE				terminal
+ 		179		EPS			N/A			N1				TRUE				terminal
 
 ----		-1		N1			N/A			N1				FALSE				N1
 
-]		176		SQBC			N/A			module				TRUE				terminal
+]		178		SQBC			N/A			module				TRUE				terminal
 
-;		176		SEMICOL			N/A			module				TRUE				terminal
+;		178		SEMICOL			N/A			module				TRUE				terminal
 
- 		178		EPS			N/A			ret				TRUE				terminal
+ 		180		EPS			N/A			ret				TRUE				terminal
 
 ----		-1		ret			N/A			module				FALSE				ret
 
-start		178		START			N/A			moduleDef				TRUE				terminal
+start		180		START			N/A			moduleDef				TRUE				terminal
 
 ----		-1		moduleDef			N/A			module				FALSE				moduleDef
 
-declare		179		DECLARE			N/A			declareStmt				TRUE				terminal
+declare		181		DECLARE			N/A			declareStmt				TRUE				terminal
 
 ----		-1		declareStmt			N/A			statement				FALSE				declareStmt
 
-tempvar		179		ID			N/A			idList				TRUE				terminal
+tempvar		181		ID			N/A			idList				TRUE				terminal
 
 ----		-1		idList			N/A			declareStmt				FALSE				idList
 
- 		179		EPS			N/A			N3				TRUE				terminal
+ 		181		EPS			N/A			N3				TRUE				terminal
 
 ----		-1		N3			N/A			idList				FALSE				N3
 
-:		179		COLON			N/A			declareStmt				TRUE				terminal
+:		181		COLON			N/A			declareStmt				TRUE				terminal
 
-real		179		REAL			N/A			dataType				TRUE				terminal
+real		181		REAL			N/A			dataType				TRUE				terminal
 
 ----		-1		dataType			N/A			declareStmt				FALSE				dataType
 
-;		179		SEMICOL			N/A			declareStmt				TRUE				terminal
+;		181		SEMICOL			N/A			declareStmt				TRUE				terminal
 
 ----		-1		statement			N/A			statements				FALSE				statement
 
 ----		-1		statements			N/A			moduleDef				FALSE				statements
 
-declare		180		DECLARE			N/A			declareStmt				TRUE				terminal
+declare		182		DECLARE			N/A			declareStmt				TRUE				terminal
 
 ----		-1		declareStmt			N/A			statement				FALSE				declareStmt
 
-i		180		ID			N/A			idList				TRUE				terminal
+i		182		ID			N/A			idList				TRUE				terminal
 
 ----		-1		idList			N/A			declareStmt				FALSE				idList
 
- 		180		EPS			N/A			N3				TRUE				terminal
+ 		182		EPS			N/A			N3				TRUE				terminal
 
 ----		-1		N3			N/A			idList				FALSE				N3
 
-:		180		COLON			N/A			declareStmt				TRUE				terminal
+:		182		COLON			N/A			declareStmt				TRUE				terminal
 
-integer		180		INTEGER			N/A			dataType				TRUE				terminal
+integer		182		INTEGER			N/A			dataType				TRUE				terminal
 
 ----		-1		dataType			N/A			declareStmt				FALSE				dataType
 
-;		180		SEMICOL			N/A			declareStmt				TRUE				terminal
+;		182		SEMICOL			N/A			declareStmt				TRUE				terminal
 
 ----		-1		statement			N/A			statements				FALSE				statement
 
 ----		-1		statements			N/A			statements				FALSE				statements
 
-i		181		ID			N/A			assignmentStmt				TRUE				terminal
+i		183		ID			N/A			assignmentStmt				TRUE				terminal
 
 ----		-1		assignmentStmt			N/A			simpleStmt				FALSE				assignmentStmt
 
-:=		181		ASSIGNOP			N/A			lvalueIDStmt				TRUE				terminal
+:=		183		ASSIGNOP			N/A			lvalueIDStmt				TRUE				terminal
 
 ----		-1		lvalueIDStmt			N/A			whichStmt				FALSE				lvalueIDStmt
 
-1		181		NUM			1			var_id_num				TRUE				terminal
+1		183		NUM			1			var_id_num				TRUE				terminal
 
 ----		-1		var_id_num			N/A			factor				FALSE				var_id_num
 
@@ -733,31 +809,31 @@ i		181		ID			N/A			assignmentStmt				TRUE				terminal
 
 ----		-1		term			N/A			arithmeticExpr				FALSE				term
 
- 		181		EPS			N/A			N5				TRUE				terminal
+ 		183		EPS			N/A			N5				TRUE				terminal
 
 ----		-1		N5			N/A			term				FALSE				N5
 
 ----		-1		arithmeticExpr			N/A			AnyTerm				FALSE				arithmeticExpr
 
- 		181		EPS			N/A			N4				TRUE				terminal
+ 		183		EPS			N/A			N4				TRUE				terminal
 
 ----		-1		N4			N/A			arithmeticExpr				FALSE				N4
 
 ----		-1		AnyTerm			N/A			arithmeticOrBooleanExpr				FALSE				AnyTerm
 
- 		181		EPS			N/A			N8				TRUE				terminal
+ 		183		EPS			N/A			N8				TRUE				terminal
 
 ----		-1		N8			N/A			AnyTerm				FALSE				N8
 
 ----		-1		arithmeticOrBooleanExpr			N/A			expression				FALSE				arithmeticOrBooleanExpr
 
- 		181		EPS			N/A			N7				TRUE				terminal
+ 		183		EPS			N/A			N7				TRUE				terminal
 
 ----		-1		N7			N/A			arithmeticOrBooleanExpr				FALSE				N7
 
 ----		-1		expression			N/A			lvalueIDStmt				FALSE				expression
 
-;		181		SEMICOL			N/A			lvalueIDStmt				TRUE				terminal
+;		183		SEMICOL			N/A			lvalueIDStmt				TRUE				terminal
 
 ----		-1		whichStmt			N/A			assignmentStmt				FALSE				whichStmt
 
@@ -767,17 +843,17 @@ i		181		ID			N/A			assignmentStmt				TRUE				terminal
 
 ----		-1		statements			N/A			statements				FALSE				statements
 
-while		182		WHILE			N/A			iterativeStmt				TRUE				terminal
+while		184		WHILE			N/A			iterativeStmt				TRUE				terminal
 
 ----		-1		iterativeStmt			N/A			statement				FALSE				iterativeStmt
 
-(		182		BO			N/A			iterativeStmt				TRUE				terminal
+(		184		BO			N/A			iterativeStmt				TRUE				terminal
 
-i		182		ID			N/A			var_id_num				TRUE				terminal
+i		184		ID			N/A			var_id_num				TRUE				terminal
 
 ----		-1		var_id_num			N/A			factor				FALSE				var_id_num
 
- 		182		EPS			N/A			whichID				TRUE				terminal
+ 		184		EPS			N/A			whichID				TRUE				terminal
 
 ----		-1		whichID			N/A			var_id_num				FALSE				whichID
 
@@ -785,29 +861,29 @@ i		182		ID			N/A			var_id_num				TRUE				terminal
 
 ----		-1		term			N/A			arithmeticExpr				FALSE				term
 
- 		182		EPS			N/A			N5				TRUE				terminal
+ 		184		EPS			N/A			N5				TRUE				terminal
 
 ----		-1		N5			N/A			term				FALSE				N5
 
 ----		-1		arithmeticExpr			N/A			AnyTerm				FALSE				arithmeticExpr
 
- 		182		EPS			N/A			N4				TRUE				terminal
+ 		184		EPS			N/A			N4				TRUE				terminal
 
 ----		-1		N4			N/A			arithmeticExpr				FALSE				N4
 
 ----		-1		AnyTerm			N/A			arithmeticOrBooleanExpr				FALSE				AnyTerm
 
-<=		182		LE			N/A			relationalOp				TRUE				terminal
+<=		184		LE			N/A			relationalOp				TRUE				terminal
 
 ----		-1		relationalOp			N/A			N8				FALSE				relationalOp
 
 ----		-1		N8			N/A			AnyTerm				FALSE				N8
 
-k		182		ID			N/A			var_id_num				TRUE				terminal
+k		184		ID			N/A			var_id_num				TRUE				terminal
 
 ----		-1		var_id_num			N/A			factor				FALSE				var_id_num
 
- 		182		EPS			N/A			whichID				TRUE				terminal
+ 		184		EPS			N/A			whichID				TRUE				terminal
 
 ----		-1		whichID			N/A			var_id_num				FALSE				whichID
 
@@ -815,63 +891,63 @@ k		182		ID			N/A			var_id_num				TRUE				terminal
 
 ----		-1		term			N/A			arithmeticExpr				FALSE				term
 
- 		182		EPS			N/A			N5				TRUE				terminal
+ 		184		EPS			N/A			N5				TRUE				terminal
 
 ----		-1		N5			N/A			term				FALSE				N5
 
 ----		-1		arithmeticExpr			N/A			N8				FALSE				arithmeticExpr
 
- 		182		EPS			N/A			N4				TRUE				terminal
+ 		184		EPS			N/A			N4				TRUE				terminal
 
 ----		-1		N4			N/A			arithmeticExpr				FALSE				N4
 
 ----		-1		arithmeticOrBooleanExpr			N/A			iterativeStmt				FALSE				arithmeticOrBooleanExpr
 
- 		182		EPS			N/A			N7				TRUE				terminal
+ 		184		EPS			N/A			N7				TRUE				terminal
 
 ----		-1		N7			N/A			arithmeticOrBooleanExpr				FALSE				N7
 
-)		182		BC			N/A			iterativeStmt				TRUE				terminal
+)		184		BC			N/A			iterativeStmt				TRUE				terminal
 
-start		182		START			N/A			iterativeStmt				TRUE				terminal
+start		184		START			N/A			iterativeStmt				TRUE				terminal
 
-get_value		184		GET_VALUE			N/A			ioStmt				TRUE				terminal
+get_value		186		GET_VALUE			N/A			ioStmt				TRUE				terminal
 
 ----		-1		ioStmt			N/A			statement				FALSE				ioStmt
 
-(		184		BO			N/A			ioStmt				TRUE				terminal
+(		186		BO			N/A			ioStmt				TRUE				terminal
 
-tempvar		184		ID			N/A			ioStmt				TRUE				terminal
+tempvar		186		ID			N/A			ioStmt				TRUE				terminal
 
-)		184		BC			N/A			ioStmt				TRUE				terminal
+)		186		BC			N/A			ioStmt				TRUE				terminal
 
-;		184		SEMICOL			N/A			ioStmt				TRUE				terminal
+;		186		SEMICOL			N/A			ioStmt				TRUE				terminal
 
 ----		-1		statement			N/A			statements				FALSE				statement
 
 ----		-1		statements			N/A			iterativeStmt				FALSE				statements
 
-arr1		185		ID			N/A			assignmentStmt				TRUE				terminal
+arr1		187		ID			N/A			assignmentStmt				TRUE				terminal
 
 ----		-1		assignmentStmt			N/A			simpleStmt				FALSE				assignmentStmt
 
-[		185		SQBO			N/A			lvalueARRStmt				TRUE				terminal
+[		187		SQBO			N/A			lvalueARRStmt				TRUE				terminal
 
 ----		-1		lvalueARRStmt			N/A			whichStmt				FALSE				lvalueARRStmt
 
-i		185		ID			N/A			index				TRUE				terminal
+i		187		ID			N/A			index				TRUE				terminal
 
 ----		-1		index			N/A			lvalueARRStmt				FALSE				index
 
-]		185		SQBC			N/A			lvalueARRStmt				TRUE				terminal
+]		187		SQBC			N/A			lvalueARRStmt				TRUE				terminal
 
-:=		185		ASSIGNOP			N/A			lvalueARRStmt				TRUE				terminal
+:=		187		ASSIGNOP			N/A			lvalueARRStmt				TRUE				terminal
 
-tempvar		185		ID			N/A			var_id_num				TRUE				terminal
+tempvar		187		ID			N/A			var_id_num				TRUE				terminal
 
 ----		-1		var_id_num			N/A			factor				FALSE				var_id_num
 
- 		185		EPS			N/A			whichID				TRUE				terminal
+ 		187		EPS			N/A			whichID				TRUE				terminal
 
 ----		-1		whichID			N/A			var_id_num				FALSE				whichID
 
@@ -879,31 +955,31 @@ tempvar		185		ID			N/A			var_id_num				TRUE				terminal
 
 ----		-1		term			N/A			arithmeticExpr				FALSE				term
 
- 		185		EPS			N/A			N5				TRUE				terminal
+ 		187		EPS			N/A			N5				TRUE				terminal
 
 ----		-1		N5			N/A			term				FALSE				N5
 
 ----		-1		arithmeticExpr			N/A			AnyTerm				FALSE				arithmeticExpr
 
- 		185		EPS			N/A			N4				TRUE				terminal
+ 		187		EPS			N/A			N4				TRUE				terminal
 
 ----		-1		N4			N/A			arithmeticExpr				FALSE				N4
 
 ----		-1		AnyTerm			N/A			arithmeticOrBooleanExpr				FALSE				AnyTerm
 
- 		185		EPS			N/A			N8				TRUE				terminal
+ 		187		EPS			N/A			N8				TRUE				terminal
 
 ----		-1		N8			N/A			AnyTerm				FALSE				N8
 
 ----		-1		arithmeticOrBooleanExpr			N/A			expression				FALSE				arithmeticOrBooleanExpr
 
- 		185		EPS			N/A			N7				TRUE				terminal
+ 		187		EPS			N/A			N7				TRUE				terminal
 
 ----		-1		N7			N/A			arithmeticOrBooleanExpr				FALSE				N7
 
 ----		-1		expression			N/A			lvalueARRStmt				FALSE				expression
 
-;		185		SEMICOL			N/A			lvalueARRStmt				TRUE				terminal
+;		187		SEMICOL			N/A			lvalueARRStmt				TRUE				terminal
 
 ----		-1		whichStmt			N/A			assignmentStmt				FALSE				whichStmt
 
@@ -913,19 +989,19 @@ tempvar		185		ID			N/A			var_id_num				TRUE				terminal
 
 ----		-1		statements			N/A			statements				FALSE				statements
 
-i		186		ID			N/A			assignmentStmt				TRUE				terminal
+i		188		ID			N/A			assignmentStmt				TRUE				terminal
 
 ----		-1		assignmentStmt			N/A			simpleStmt				FALSE				assignmentStmt
 
-:=		186		ASSIGNOP			N/A			lvalueIDStmt				TRUE				terminal
+:=		188		ASSIGNOP			N/A			lvalueIDStmt				TRUE				terminal
 
 ----		-1		lvalueIDStmt			N/A			whichStmt				FALSE				lvalueIDStmt
 
-i		186		ID			N/A			var_id_num				TRUE				terminal
+i		188		ID			N/A			var_id_num				TRUE				terminal
 
 ----		-1		var_id_num			N/A			factor				FALSE				var_id_num
 
- 		186		EPS			N/A			whichID				TRUE				terminal
+ 		188		EPS			N/A			whichID				TRUE				terminal
 
 ----		-1		whichID			N/A			var_id_num				FALSE				whichID
 
@@ -933,19 +1009,19 @@ i		186		ID			N/A			var_id_num				TRUE				terminal
 
 ----		-1		term			N/A			arithmeticExpr				FALSE				term
 
- 		186		EPS			N/A			N5				TRUE				terminal
+ 		188		EPS			N/A			N5				TRUE				terminal
 
 ----		-1		N5			N/A			term				FALSE				N5
 
 ----		-1		arithmeticExpr			N/A			AnyTerm				FALSE				arithmeticExpr
 
-+		186		PLUS			N/A			op1				TRUE				terminal
++		188		PLUS			N/A			op1				TRUE				terminal
 
 ----		-1		op1			N/A			N4				FALSE				op1
 
 ----		-1		N4			N/A			arithmeticExpr				FALSE				N4
 
-1		186		NUM			1			var_id_num				TRUE				terminal
+1		188		NUM			1			var_id_num				TRUE				terminal
 
 ----		-1		var_id_num			N/A			factor				FALSE				var_id_num
 
@@ -953,29 +1029,29 @@ i		186		ID			N/A			var_id_num				TRUE				terminal
 
 ----		-1		term			N/A			N4				FALSE				term
 
- 		186		EPS			N/A			N5				TRUE				terminal
+ 		188		EPS			N/A			N5				TRUE				terminal
 
 ----		-1		N5			N/A			term				FALSE				N5
 
- 		186		EPS			N/A			N4				TRUE				terminal
+ 		188		EPS			N/A			N4				TRUE				terminal
 
 ----		-1		N4			N/A			N4				FALSE				N4
 
 ----		-1		AnyTerm			N/A			arithmeticOrBooleanExpr				FALSE				AnyTerm
 
- 		186		EPS			N/A			N8				TRUE				terminal
+ 		188		EPS			N/A			N8				TRUE				terminal
 
 ----		-1		N8			N/A			AnyTerm				FALSE				N8
 
 ----		-1		arithmeticOrBooleanExpr			N/A			expression				FALSE				arithmeticOrBooleanExpr
 
- 		186		EPS			N/A			N7				TRUE				terminal
+ 		188		EPS			N/A			N7				TRUE				terminal
 
 ----		-1		N7			N/A			arithmeticOrBooleanExpr				FALSE				N7
 
 ----		-1		expression			N/A			lvalueIDStmt				FALSE				expression
 
-;		186		SEMICOL			N/A			lvalueIDStmt				TRUE				terminal
+;		188		SEMICOL			N/A			lvalueIDStmt				TRUE				terminal
 
 ----		-1		whichStmt			N/A			assignmentStmt				FALSE				whichStmt
 
@@ -985,21 +1061,21 @@ i		186		ID			N/A			var_id_num				TRUE				terminal
 
 ----		-1		statements			N/A			statements				FALSE				statements
 
- 		188		EPS			N/A			statements				TRUE				terminal
+ 		190		EPS			N/A			statements				TRUE				terminal
 
 ----		-1		statements			N/A			statements				FALSE				statements
 
-end		182		END			N/A			iterativeStmt				TRUE				terminal
+end		184		END			N/A			iterativeStmt				TRUE				terminal
 
 ----		-1		statement			N/A			statements				FALSE				statement
 
 ----		-1		statements			N/A			statements				FALSE				statements
 
- 		189		EPS			N/A			statements				TRUE				terminal
+ 		191		EPS			N/A			statements				TRUE				terminal
 
 ----		-1		statements			N/A			statements				FALSE				statements
 
-end		178		END			N/A			moduleDef				TRUE				terminal
+end		180		END			N/A			moduleDef				TRUE				terminal
 
 ----		-1		otherModules			N/A			program				FALSE				otherModules
 
