@@ -1,4 +1,4 @@
- #include "symbolTable.h"
+#include "symbolTable.h"
 extern char *terminal_map;
 extern char *non_terminal_map;
 
@@ -37,7 +37,7 @@ type getType(ASTNode *node){
         else {a.e_idx = -1;a.is_static = false;}
         node_type.t.a =a;
         node_type.is_array = 1;
-       return node_type;
+        return node_type;
     }
     else if(node->data.enum_value == T_INTEGER){
         struct variable var;
@@ -748,7 +748,9 @@ void print_var_st(var_st* table){
                 temp = temp->next;
             }
         }
+        printf("%s","Printing Child Table \n");
         print_var_st(table->child);
+        printf("%s","Printing Sibling Table \n");
         print_var_st(table->next);
     }
 }

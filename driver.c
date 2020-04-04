@@ -12,6 +12,7 @@ Group #28
 #include "parser.h"
 #include "ast.h"
 #include "symbolTable.h"
+#include "codegen.h"
 
 #include <time.h>
 
@@ -170,6 +171,7 @@ int main(int argc,char *argv[]){
 			int size_for_string = 0;
             fill_symbol_table(ast,NULL,for_string,size_for_string);
             print_st();
+            declaration_maker();
         }
 
         else if(ip==4){
