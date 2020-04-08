@@ -164,14 +164,20 @@ int main(int argc,char *argv[]){
             ASTNode *ast = postorder(root_of_pTree,  NULL);
 
             fill_ast_parent(ast);
-            //printTree(ast);
+            printTree(ast);
             
             initialise_func_st_root();
 			char for_string[10][21];
 			int size_for_string = 0;
             fill_symbol_table(ast,NULL,for_string,size_for_string);
-            print_st();
+            //print_st();
             declaration_maker();
+            printf("%d",ast->forward->forward->left_child->left_child->left_child->right_child->data.enum_value);
+            func_hash_entry *main_entry = find_func_hash("program");
+            var_st *main_st = main_entry->child;
+            FILE *f = fopen("olo.asm", "w");
+            //make_code(ast->forward->forward->left_child->left_child->left_child->right_child,main_st,f);
+            fclose(f);
         }
 
         else if(ip==4){
