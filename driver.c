@@ -13,6 +13,7 @@ Group #28
 #include "ast.h"
 #include "symbolTable.h"
 #include "codegen.h"
+#include "codegen_driver.h"
 
 #include <time.h>
 
@@ -171,12 +172,14 @@ int main(int argc,char *argv[]){
 			int size_for_string = 0;
             fill_symbol_table(ast,NULL,for_string,size_for_string);
             //print_st();
-            declaration_maker();
-            printf("%d",ast->forward->forward->left_child->left_child->left_child->right_child->data.enum_value);
-            func_hash_entry *main_entry = find_func_hash("program");
-            var_st *main_st = main_entry->child;
-            FILE *f = fopen("olo.asm", "w");
+            //declaration_maker();
+            //printf("%d",ast->forward->forward->left_child->left_child->left_child->right_child->data.enum_value);
+            //func_hash_entry *main_entry = find_func_hash("program");
+            //var_st *main_st = main_entry->child;
+            FILE *f = fopen("D:/Compiler_project/ollydbg/olo.asm", "w");
             //make_code(ast->forward->forward->left_child->left_child->left_child->right_child,main_st,f);
+            declaration_maker(f);
+            entire_code_gen(ast,f);
             fclose(f);
         }
 

@@ -6,9 +6,8 @@ int cmp_count = 0;
 //have to make it global as it gets locally chutiyapa
 char temp_lexeme[50];
 
-void declaration_maker()
+void declaration_maker(FILE *f1)
 {
-    FILE *f1 = fopen("bss_section.asm","w");
     fprintf(f1,"SECTION .bss \n");
     for (int i = 0; i < SYMBOL_TABLE_SIZE; i++)
     {
@@ -18,9 +17,9 @@ void declaration_maker()
             f_entry = f_entry->next;
         }
     }
-    fprintf(f1,"sys_fleft : resb 4");
-    fprintf(f1,"sys_fright : resb 4");
-    fclose(f1);
+    fprintf(f1,"sys_fleft : resb 4\n");
+    fprintf(f1,"sys_fright : resb 4\n");
+    fprintf(f1,"section .txt\n");
 }
 
 void declaration_varst(var_st *table,FILE*f)
@@ -88,8 +87,8 @@ void terminals_handler(ASTNode *ast_node , var_st *table , FILE *f)
     {
         type_flag = REAL;
         if(is_left_child(ast_node))
-        fprintf(f,"mov [sys_fleft], __float32__(%s)\n",ast_node->data.str); // not writing DWORD as it is implicit.
-        else fprintf(f,"mov [sys_fright], __float32__(%s)\n",ast_node->data.str);
+        fprintf(f,"mov dword[sys_fleft], __float32__(%s)\n",ast_node->data.str); // not writing DWORD as it is implicit.
+        else fprintf(f,"mov dword[sys_fright], __float32__(%s)\n",ast_node->data.str);
     }
     else if(ast_node->data.enum_value == T_TRUE)
     {
@@ -170,11 +169,11 @@ void terminals_handler(ASTNode *ast_node , var_st *table , FILE *f)
                     //things happen in 32 bit regs
                     if(is_left_child(ast_node))
                     {
-                        fprintf(f,"xor eax,eax\n mov [sys_fleft], dword[ecx]\n");
+                        fprintf(f,"xor eax,eax\n mov dword[sys_fleft], ecx\n");
                     }                 
                     else
                     {
-                        fprintf(f,"xor ebx,ebx\n mov [sys_fright], dword[ecx]\n");
+                        fprintf(f,"xor ebx,ebx\n mov dword[sys_fright], ecx\n");
                     }
                 }
                 fprintf(f,"pop ecx\npop ebx\npop eax\n");
@@ -217,11 +216,11 @@ void terminals_handler(ASTNode *ast_node , var_st *table , FILE *f)
                     //things happen in 32 bit regs
                     if(is_left_child(ast_node))
                     {
-                        fprintf(f,"xor eax,eax\n mov [sys_fleft], dword[ecx]\n");
+                        fprintf(f,"xor eax,eax\n mov dword[sys_fleft], ecx\n");
                     }                 
                     else
                     {
-                        fprintf(f,"xor ebx,ebx\n mov [sys_fright], dword[ecx]\n");
+                        fprintf(f,"xor ebx,ebx\n mov dword[sys_fright], ecx\n");
                     }
                 }
                 fprintf(f,"pop ecx\n");
@@ -260,11 +259,11 @@ void terminals_handler(ASTNode *ast_node , var_st *table , FILE *f)
                 type_flag = REAL;
                 if(is_left_child(ast_node))
                 {
-                    fprintf(f,"xor eax,eax\nmov eax, dword[%s]\nmov [sys_fleft] eax\n",lexeme_generator(ast_node->data.str,ast_node->data.line_number));
+                    fprintf(f,"xor eax,eax\nmov eax, dword[%s]\nmov dword[sys_fleft] eax\n",lexeme_generator(ast_node->data.str,ast_node->data.line_number));
                 }
                 else
                 {
-                    fprintf(f,"xor ebx,ebx\nmov ebx, dword[%s]\nmov [sys_fright] ebx\n",lexeme_generator(ast_node->data.str,ast_node->data.line_number));    
+                    fprintf(f,"xor ebx,ebx\nmov ebx, dword[%s]\nmov dword[sys_fright] ebx\n",lexeme_generator(ast_node->data.str,ast_node->data.line_number));    
                 }
             }
         }
@@ -296,8 +295,8 @@ void expr_code_writer(ASTNode *ast_node , var_st *table , FILE *f , int child_fl
             else
             {
                 fprintf(f, "fld dword[sys_fleft]\nfld dword[sys_fright]\nfaddp\n");
-                if(is_left_child) fprintf(f,"fstp dword[sys_fleft]");
-                else fprintf(f,"fstp dword[sys_fright]");
+                if(is_left_child) fprintf(f,"fstp dword[sys_fleft]\n");
+                else fprintf(f,"fstp dword[sys_fright]\n");
             }  
         }
         else
@@ -317,8 +316,8 @@ void expr_code_writer(ASTNode *ast_node , var_st *table , FILE *f , int child_fl
             else
             {
                 fprintf(f, "fld dword[sys_fleft]\nfld dword[sys_fright]\nfsubp st1,st0\n");
-                if(is_left_child) fprintf(f,"fstp dword[sys_fleft]");
-                else fprintf(f,"fstp dword[sys_fright]");
+                if(is_left_child) fprintf(f,"fstp dword[sys_fleft]\n");
+                else fprintf(f,"fstp dword[sys_fright]\n");
             }  
         }
         else
@@ -331,7 +330,7 @@ void expr_code_writer(ASTNode *ast_node , var_st *table , FILE *f , int child_fl
             else
             {
                 fprintf(f,"fld dword[sys_fleft]\nfchs\n");
-                fprintf(f,"fstp dword[sys_fleft]");
+                fprintf(f,"fstp dword[sys_fleft]\n");
             }
         }
     }
@@ -358,8 +357,8 @@ void expr_code_writer(ASTNode *ast_node , var_st *table , FILE *f , int child_fl
         if(type_flag == INTEGER)
         {
             fprintf(f,"cmp ax , bx\n");
-            if(!is_left_child) fprintf(f,"jl sys_true_ax%d\njg sys_false_ax%d\n",cmp_count,cmp_count);
-            else fprintf(f,"jl sys_true_bx%d\njg sys_false_bx%d\n",cmp_count,cmp_count);
+            if(!is_left_child) fprintf(f,"jl sys_true_ax%d\njmp sys_false_ax%d\n",cmp_count,cmp_count);
+            else fprintf(f,"jl sys_true_bx%d\njmp sys_false_bx%d\n",cmp_count,cmp_count);
             fprintf(f, "sys_true_ax%d: xor eax,eax\nmov al, 0x1\njmp sys_cmp_exit%d\n",cmp_count,cmp_count);
             fprintf(f, "sys_false_ax%d: xor eax,eax\nmov al, 0x0\njmp sys_cmp_exit%d\n",cmp_count,cmp_count);
             fprintf(f, "sys_true_bx%d: xor ebx,ebx\nmov bl, 0x1\njmp sys_cmp_exit%d\n",cmp_count,cmp_count);
@@ -368,8 +367,8 @@ void expr_code_writer(ASTNode *ast_node , var_st *table , FILE *f , int child_fl
         }
         else
         {
-            if(!is_left_child)fprintf(f,"fcompp\nxor eax,eax\nfstsw ax\nand ax,0x0100\njz sys_true_ax%d\nlb_greater%d: jnz sys_false_ax%d\n",cmp_count,cmp_count,cmp_count);
-            else fprintf(f,"fcompp\nxor eax,eax\nfstsw ax\nand ax,0x0100\njz sys_true_bx%d\nlb_greater%d: jnz sys_false_bx%d\n",cmp_count,cmp_count,cmp_count);
+            if(!is_left_child)fprintf(f,"fcompp\nxor eax,eax\nfstsw ax\nand ax,0x0100\njz sys_true_ax%d\njnz sys_false_ax%d\n",cmp_count,cmp_count);
+            else fprintf(f,"fcompp\nxor eax,eax\nfstsw ax\nand ax,0x0100\njz sys_true_bx%d\njnz sys_false_bx%d\n",cmp_count,cmp_count);
             fprintf(f, "sys_true_ax%d: xor eax,eax\nmov al, 0x1\njmp sys_cmp_exit%d\n",cmp_count,cmp_count);
             fprintf(f, "sys_false_ax%d: xor eax,eax\nmov al, 0x0\njmp sys_cmp_exit%d\n",cmp_count,cmp_count);
             fprintf(f, "sys_true_bx%d: xor ebx,ebx\nmov bl, 0x1\njmp sys_cmp_exit%d\n",cmp_count,cmp_count);
@@ -384,8 +383,8 @@ void expr_code_writer(ASTNode *ast_node , var_st *table , FILE *f , int child_fl
         if(type_flag == INTEGER)
         {
             fprintf(f,"cmp ax , bx\n");
-            if(!is_left_child) fprintf(f,"jle sys_true_ax%d\njg sys_false_ax%d\n",cmp_count,cmp_count);
-            else fprintf(f,"jle sys_true_bx%d\njg sys_false_bx%d\n",cmp_count,cmp_count);
+            if(!is_left_child) fprintf(f,"jle sys_true_ax%d\njmp sys_false_ax%d\n",cmp_count,cmp_count);
+            else fprintf(f,"jle sys_true_bx%d\njmp sys_false_bx%d\n",cmp_count,cmp_count);
             fprintf(f, "sys_true_ax%d: xor eax,eax\nmov al, 0x1\njmp sys_cmp_exit%d\n",cmp_count,cmp_count);
             fprintf(f, "sys_false_ax%d: xor eax,eax\nmov al, 0x0\njmp sys_cmp_exit%d\n",cmp_count,cmp_count);
             fprintf(f, "sys_true_bx%d: xor ebx,ebx\nmov bl, 0x1\njmp sys_cmp_exit%d\n",cmp_count,cmp_count);
@@ -411,8 +410,8 @@ void expr_code_writer(ASTNode *ast_node , var_st *table , FILE *f , int child_fl
         if(type_flag == INTEGER)
         {
             fprintf(f,"cmp ax , bx\n");
-            if(!is_left_child) fprintf(f,"jg sys_true_ax%d\njg sys_false_ax%d\n",cmp_count,cmp_count);
-            else fprintf(f,"jg sys_true_bx%d\njg sys_false_bx%d\n",cmp_count,cmp_count);
+            if(!is_left_child) fprintf(f,"jg sys_true_ax%d\njmp sys_false_ax%d\n",cmp_count,cmp_count);
+            else fprintf(f,"jg sys_true_bx%d\njmp sys_false_bx%d\n",cmp_count,cmp_count);
             fprintf(f, "sys_true_ax%d: xor eax,eax\nmov al, 0x1\njmp sys_cmp_exit%d\n",cmp_count,cmp_count);
             fprintf(f, "sys_false_ax%d: xor eax,eax\nmov al, 0x0\njmp sys_cmp_exit%d\n",cmp_count,cmp_count);
             fprintf(f, "sys_true_bx%d: xor ebx,ebx\nmov bl, 0x1\njmp sys_cmp_exit%d\n",cmp_count,cmp_count);
@@ -421,8 +420,8 @@ void expr_code_writer(ASTNode *ast_node , var_st *table , FILE *f , int child_fl
         }
         else
         {
-            if(!is_left_child)fprintf(f,"fcompp\nxor eax,eax\nfstsw ax\nand ax,0x0100\njz sys_false_ax%d\nlb_greater%d: jnz sys_true_ax%d\n",cmp_count,cmp_count,cmp_count);
-            else fprintf(f,"fcompp\nxor eax,eax\nfstsw ax\nand ax,0x0100\njz sys_false_bx%d\nlb_greater%d: jnz sys_true_bx%d\n",cmp_count,cmp_count,cmp_count);
+            if(!is_left_child)fprintf(f,"fcompp\nxor eax,eax\nfstsw ax\nand ax,0x0100\njz sys_false_ax%d\njnz sys_true_ax%d\n",cmp_count,cmp_count);
+            else fprintf(f,"fcompp\nxor eax,eax\nfstsw ax\nand ax,0x0100\njz sys_false_bx%d\njnz sys_true_bx%d\n",cmp_count,cmp_count);
             fprintf(f, "sys_true_ax%d: xor eax,eax\nmov al, 0x1\njmp sys_cmp_exit%d\n",cmp_count,cmp_count);
             fprintf(f, "sys_false_ax%d: xor eax,eax\nmov al, 0x0\njmp sys_cmp_exit%d\n",cmp_count,cmp_count);
             fprintf(f, "sys_true_bx%d: xor ebx,ebx\nmov bl, 0x1\njmp sys_cmp_exit%d\n",cmp_count,cmp_count);
@@ -437,8 +436,8 @@ void expr_code_writer(ASTNode *ast_node , var_st *table , FILE *f , int child_fl
         if(type_flag == INTEGER)
         {
             fprintf(f,"cmp ax , bx\n");
-            if(!is_left_child) fprintf(f,"jge sys_true_ax%d\njg sys_false_ax%d\n",cmp_count,cmp_count);
-            else fprintf(f,"jge sys_true_bx%d\njg sys_false_bx%d\n",cmp_count,cmp_count);
+            if(!is_left_child) fprintf(f,"jge sys_true_ax%d\njmp sys_false_ax%d\n",cmp_count,cmp_count);
+            else fprintf(f,"jge sys_true_bx%d\njmp sys_false_bx%d\n",cmp_count,cmp_count);
             fprintf(f, "sys_true_ax%d: xor eax,eax\nmov al, 0x1\njmp sys_cmp_exit%d\n",cmp_count,cmp_count);
             fprintf(f, "sys_false_ax%d: xor eax,eax\nmov al, 0x0\njmp sys_cmp_exit%d\n",cmp_count,cmp_count);
             fprintf(f, "sys_true_bx%d: xor ebx,ebx\nmov bl, 0x1\njmp sys_cmp_exit%d\n",cmp_count,cmp_count);
@@ -463,8 +462,8 @@ void expr_code_writer(ASTNode *ast_node , var_st *table , FILE *f , int child_fl
         if(type_flag == INTEGER)
         {
             fprintf(f,"cmp ax , bx\n");
-            if(!is_left_child) fprintf(f,"je sys_true_ax%d\njg sys_false_ax%d\n",cmp_count,cmp_count);
-            else fprintf(f,"je sys_true_bx%d\njg sys_false_bx%d\n",cmp_count,cmp_count);
+            if(!is_left_child) fprintf(f,"je sys_true_ax%d\njmp sys_false_ax%d\n",cmp_count,cmp_count);
+            else fprintf(f,"je sys_true_bx%d\njmp sys_false_bx%d\n",cmp_count,cmp_count);
             fprintf(f, "sys_true_ax%d: xor eax,eax\nmov al, 0x1\njmp sys_cmp_exit%d\n",cmp_count,cmp_count);
             fprintf(f, "sys_false_ax%d: xor eax,eax\nmov al, 0x0\njmp sys_cmp_exit%d\n",cmp_count,cmp_count);
             fprintf(f, "sys_true_bx%d: xor ebx,ebx\nmov bl, 0x1\njmp sys_cmp_exit%d\n",cmp_count,cmp_count);
@@ -474,7 +473,7 @@ void expr_code_writer(ASTNode *ast_node , var_st *table , FILE *f , int child_fl
         else
         {
             if(!is_left_child)fprintf(f,"fcompp\nxor eax,eax\nfstsw ax\nand ax,0x4000\njz sys_false_ax%d\njmp sys_true_ax%d\n",cmp_count,cmp_count);
-            else fprintf(f,"fcompp\nxor eax,eax\nfstsw ax\nand ax,0x0100\njz sys_false_bx%d\njmp sys_true_bx%d\n",cmp_count,cmp_count);
+            else fprintf(f,"fcompp\nxor eax,eax\nfstsw ax\nand ax,0x4000\njz sys_false_bx%d\njmp sys_true_bx%d\n",cmp_count,cmp_count);
             fprintf(f, "sys_true_ax%d: xor eax,eax\nmov al, 0x1\njmp sys_cmp_exit%d\n",cmp_count,cmp_count);
             fprintf(f, "sys_false_ax%d: xor eax,eax\nmov al, 0x0\njmp sys_cmp_exit%d\n",cmp_count,cmp_count);
             fprintf(f, "sys_true_bx%d: xor ebx,ebx\nmov bl, 0x1\njmp sys_cmp_exit%d\n",cmp_count,cmp_count);
@@ -490,8 +489,8 @@ void expr_code_writer(ASTNode *ast_node , var_st *table , FILE *f , int child_fl
         if(type_flag == INTEGER)
         {
             fprintf(f,"cmp ax , bx\n");
-            if(!is_left_child) fprintf(f,"jne sys_true_ax%d\njg sys_false_ax%d\n",cmp_count,cmp_count);
-            else fprintf(f,"jne sys_true_bx%d\njg sys_false_bx%d\n",cmp_count,cmp_count);
+            if(!is_left_child) fprintf(f,"jne sys_true_ax%d\njmp sys_false_ax%d\n",cmp_count,cmp_count);
+            else fprintf(f,"jne sys_true_bx%d\njmp sys_false_bx%d\n",cmp_count,cmp_count);
             fprintf(f, "sys_true_ax%d: xor eax,eax\nmov al, 0x1\njmp sys_cmp_exit%d\n",cmp_count,cmp_count);
             fprintf(f, "sys_false_ax%d: xor eax,eax\nmov al, 0x0\njmp sys_cmp_exit%d\n",cmp_count,cmp_count);
             fprintf(f, "sys_true_bx%d: xor ebx,ebx\nmov bl, 0x1\njmp sys_cmp_exit%d\n",cmp_count,cmp_count);
@@ -501,7 +500,7 @@ void expr_code_writer(ASTNode *ast_node , var_st *table , FILE *f , int child_fl
         else
         {
             if(!is_left_child)fprintf(f,"fcompp\nxor eax,eax\nfstsw ax\nand ax,0x4000\njnz sys_false_ax%d\njmp sys_true_ax%d\n",cmp_count,cmp_count);
-            else fprintf(f,"fcompp\nxor eax,eax\nfstsw ax\nand ax,0x0100\njnz sys_false_bx%d\njmp sys_true_bx%d\n",cmp_count,cmp_count);
+            else fprintf(f,"fcompp\nxor eax,eax\nfstsw ax\nand ax,0x4000\njnz sys_false_bx%d\njmp sys_true_bx%d\n",cmp_count,cmp_count);
             fprintf(f, "sys_true_ax%d: xor eax,eax\nmov al, 0x1\njmp sys_cmp_exit%d\n",cmp_count,cmp_count);
             fprintf(f, "sys_false_ax%d: xor eax,eax\nmov al, 0x0\njmp sys_cmp_exit%d\n",cmp_count,cmp_count);
             fprintf(f, "sys_true_bx%d: xor ebx,ebx\nmov bl, 0x1\njmp sys_cmp_exit%d\n",cmp_count,cmp_count);
@@ -519,9 +518,9 @@ void expr_code_writer(ASTNode *ast_node , var_st *table , FILE *f , int child_fl
         }
         else
         {
-            fprintf(f, "fld dword[sys_fleft]\nfld dword[sys_fright]\nfsubp st1,st0\n");
-            if(is_left_child) fprintf(f,"fstp dword[sys_fleft]");
-            else fprintf(f,"fstp dword[sys_fright]");
+            fprintf(f, "fld dword[sys_fleft]\nfld dword[sys_fright]\nfmulp st1,st0\n");
+            if(is_left_child) fprintf(f,"fstp dword[sys_fleft]\n");
+            else fprintf(f,"fstp dword[sys_fright]\n");
         }
     }
     if(operator == 12)
@@ -534,9 +533,9 @@ void expr_code_writer(ASTNode *ast_node , var_st *table , FILE *f , int child_fl
         }
         else
         {
-            fprintf(f, "fld dword[sys_fleft]\nfld dword[sys_fright]\nfsubp st1,st0\n");
-            if(is_left_child) fprintf(f,"fstp dword[sys_fleft]");
-            else fprintf(f,"fstp dword[sys_fright]");
+            fprintf(f, "fld dword[sys_fleft]\nfld dword[sys_fright]\nfdivp st1,st0\n");
+            if(is_left_child) fprintf(f,"fstp dword[sys_fleft]\n");
+            else fprintf(f,"fstp dword[sys_fright]\n");
         }
     }
     if(operator >=5 && operator<=10)
