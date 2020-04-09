@@ -575,7 +575,9 @@ void operator_processor(ASTNode *ast_node , var_st *table , FILE *f, int operato
     if (flag == 0)
     {
         make_code(ast_node->right_child,table,f);
+        fprintf(f,"push ebx\n");
         make_code(ast_node->left_child,table,f);
+        fprintf(f,"pop ebx\n");
         expr_code_writer(ast_node,table,f,0,operator);
     } 
     else if (flag == 1)
